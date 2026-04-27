@@ -1,0 +1,1243 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guia Comercial Descompliquei — Método C.L.A.R.O.</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --or: #E85D24;
+  --or2: #FF7A42;
+  --or-light: #FFF3EE;
+  --dk: #0D0D0D;
+  --dk2: #1A1A1A;
+  --dk3: #242424;
+  --mid: #3A3A3A;
+  --gray: #8A8A8A;
+  --lt: #F5F0EB;
+  --wh: #FDFAF7;
+  --success: #2ECC71;
+  --warn: #F39C12;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--dk);
+  color:var(--wh);
+  font-family:'DM Sans',sans-serif;
+  font-size:16px;
+  line-height:1.7;
+  overflow-x:hidden;
+}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--dk2)}
+::-webkit-scrollbar-thumb{background:var(--or);border-radius:2px}
+
+/* ── HERO ── */
+.hero{
+  min-height:100vh;
+  display:flex;flex-direction:column;justify-content:center;
+  padding:80px 60px;
+  position:relative;
+  overflow:hidden;
+  background:var(--dk);
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 70% 60% at 80% 50%, rgba(232,93,36,0.12) 0%, transparent 70%);
+}
+.hero::after{
+  content:'';position:absolute;
+  top:-200px;right:-200px;
+  width:600px;height:600px;
+  border:1px solid rgba(232,93,36,0.15);
+  border-radius:50%;
+}
+.hero-tag{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(232,93,36,0.15);
+  border:1px solid rgba(232,93,36,0.3);
+  color:var(--or2);
+  font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;
+  padding:8px 16px;border-radius:100px;
+  margin-bottom:32px;width:fit-content;
+}
+.hero-tag::before{content:'';width:6px;height:6px;background:var(--or);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
+.hero h1{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(72px,10vw,140px);
+  line-height:0.9;
+  color:var(--wh);
+  letter-spacing:-2px;
+  margin-bottom:8px;
+}
+.hero h1 span{color:var(--or)}
+.hero-sub{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(18px,2.5vw,26px);
+  color:var(--gray);
+  font-style:italic;
+  margin-bottom:48px;
+  max-width:500px;
+}
+.hero-meta{
+  display:flex;gap:40px;flex-wrap:wrap;
+}
+.hero-meta-item{
+  display:flex;flex-direction:column;gap:4px;
+}
+.hero-meta-item span:first-child{
+  font-size:11px;color:var(--gray);letter-spacing:2px;text-transform:uppercase;
+}
+.hero-meta-item span:last-child{
+  font-size:18px;font-weight:600;color:var(--wh);
+}
+.hero-num{
+  position:absolute;right:60px;bottom:60px;
+  font-family:'Bebas Neue',sans-serif;
+  font-size:200px;color:rgba(255,255,255,0.03);
+  line-height:1;user-select:none;
+}
+
+/* ── NAV ── */
+.nav{
+  position:sticky;top:0;z-index:100;
+  background:rgba(13,13,13,0.92);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(255,255,255,0.06);
+  padding:0 60px;
+  display:flex;align-items:center;gap:0;
+  overflow-x:auto;
+  scrollbar-width:none;
+}
+.nav::-webkit-scrollbar{display:none}
+.nav-item{
+  padding:20px 24px;
+  font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--gray);
+  cursor:pointer;white-space:nowrap;
+  border-bottom:2px solid transparent;
+  transition:all 0.2s;
+  text-decoration:none;
+}
+.nav-item:hover,.nav-item.active{color:var(--or);border-bottom-color:var(--or)}
+.nav-logo{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:22px;color:var(--or);
+  margin-right:32px;white-space:nowrap;
+  border-bottom:2px solid transparent;padding:20px 0;
+}
+
+/* ── SECTIONS ── */
+.section{
+  padding:120px 60px;
+  max-width:1200px;
+  margin:0 auto;
+}
+.section-label{
+  display:flex;align-items:center;gap:12px;
+  font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;
+  color:var(--or);margin-bottom:24px;
+}
+.section-label::after{content:'';flex:1;height:1px;background:rgba(232,93,36,0.3);max-width:60px}
+.section-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(48px,6vw,80px);
+  line-height:0.95;letter-spacing:-1px;
+  color:var(--wh);margin-bottom:16px;
+}
+.section-title span{color:var(--or)}
+.section-lead{
+  font-size:18px;color:var(--gray);
+  max-width:600px;line-height:1.8;
+  margin-bottom:64px;
+}
+
+/* ── DIVIDER ── */
+.full-divider{
+  height:1px;background:rgba(255,255,255,0.06);
+  margin:0 60px;
+}
+
+/* ── CLARO PILLS ── */
+.claro-pills{
+  display:flex;gap:8px;flex-wrap:wrap;margin-bottom:64px;
+}
+.claro-pill{
+  padding:10px 20px;border-radius:100px;
+  font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;
+  cursor:pointer;transition:all 0.25s;border:1px solid transparent;
+}
+.claro-pill.active,.claro-pill:hover{background:var(--or);color:var(--wh)}
+.claro-pill:not(.active){background:rgba(255,255,255,0.04);color:var(--gray);border-color:rgba(255,255,255,0.08)}
+
+/* ── FUNNEL ── */
+.funnel{display:flex;flex-direction:column;gap:0;max-width:700px}
+.funnel-step{
+  display:flex;gap:24px;padding:28px 0;
+  border-bottom:1px solid rgba(255,255,255,0.06);
+  cursor:pointer;
+}
+.funnel-step:last-child{border-bottom:none}
+.funnel-num{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:48px;line-height:1;
+  color:rgba(232,93,36,0.2);
+  min-width:52px;transition:color 0.2s;
+}
+.funnel-step:hover .funnel-num{color:var(--or)}
+.funnel-body{flex:1}
+.funnel-title{font-size:18px;font-weight:600;color:var(--wh);margin-bottom:6px}
+.funnel-desc{font-size:14px;color:var(--gray);line-height:1.6}
+.funnel-badge{
+  display:inline-block;margin-top:10px;
+  padding:4px 10px;border-radius:100px;
+  font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+  background:rgba(232,93,36,0.15);color:var(--or);
+}
+
+/* ── SCRIPT STEPPER ── */
+.script-steps{display:flex;flex-direction:column;gap:2px}
+.script-step{
+  background:var(--dk2);border-radius:16px;
+  overflow:hidden;transition:all 0.3s;
+  border:1px solid rgba(255,255,255,0.06);
+}
+.script-step.open{border-color:rgba(232,93,36,0.3)}
+.script-header{
+  display:flex;align-items:center;gap:20px;
+  padding:24px 28px;cursor:pointer;
+}
+.script-icon{
+  width:44px;height:44px;border-radius:12px;
+  background:rgba(232,93,36,0.1);
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;flex-shrink:0;
+  transition:background 0.2s;
+}
+.script-step.open .script-icon{background:var(--or)}
+.script-step-num{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:13px;letter-spacing:2px;
+  color:var(--or);min-width:32px;
+}
+.script-step-title{font-size:16px;font-weight:600;color:var(--wh);flex:1}
+.script-step-time{
+  font-size:11px;color:var(--gray);
+  background:rgba(255,255,255,0.05);
+  padding:4px 10px;border-radius:100px;
+}
+.script-chevron{
+  width:20px;height:20px;color:var(--gray);
+  transition:transform 0.3s;flex-shrink:0;
+}
+.script-step.open .script-chevron{transform:rotate(180deg)}
+.script-body{
+  display:none;padding:0 28px 28px 92px;
+}
+.script-step.open .script-body{display:block}
+.script-desc{font-size:14px;color:var(--gray);margin-bottom:20px;line-height:1.8}
+
+/* ── TAGS ── */
+.tag-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+.tag{
+  padding:6px 14px;border-radius:100px;font-size:12px;font-weight:600;
+}
+.tag-do{background:rgba(46,204,113,0.15);color:#2ECC71}
+.tag-dont{background:rgba(231,76,60,0.15);color:#E74C3C}
+.tag-tip{background:rgba(243,156,18,0.15);color:#F39C12}
+
+/* ── EXEMPLO BOXES ── */
+.exemplo-box{
+  background:var(--dk3);border-radius:12px;
+  padding:20px 24px;margin-top:12px;
+  border-left:3px solid var(--or);
+}
+.exemplo-label{
+  font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  color:var(--or);margin-bottom:8px;
+}
+.exemplo-text{
+  font-size:14px;color:var(--wh);line-height:1.7;
+  font-family:'Playfair Display',serif;font-style:italic;
+}
+.exemplo-box.dont{border-left-color:#E74C3C}
+.exemplo-box.dont .exemplo-label{color:#E74C3C}
+.exemplo-box.dont .exemplo-text{color:var(--gray);text-decoration:line-through;text-decoration-color:rgba(231,76,60,0.5)}
+
+/* ── TIPS GRID ── */
+.tips-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-top:20px}
+.tip-card{
+  background:var(--dk3);border-radius:14px;
+  padding:20px 22px;
+  border:1px solid rgba(255,255,255,0.06);
+}
+.tip-card-icon{font-size:22px;margin-bottom:10px}
+.tip-card-title{font-size:14px;font-weight:600;color:var(--wh);margin-bottom:6px}
+.tip-card-desc{font-size:13px;color:var(--gray);line-height:1.6}
+
+/* ── OBJEÇÕES ── */
+.objection-grid{display:flex;flex-direction:column;gap:2px}
+.objection{
+  background:var(--dk2);border-radius:14px;
+  overflow:hidden;border:1px solid rgba(255,255,255,0.06);
+}
+.objection.open{border-color:rgba(232,93,36,0.25)}
+.objection-q{
+  display:flex;align-items:center;gap:16px;
+  padding:22px 24px;cursor:pointer;
+}
+.objection-quote{
+  font-size:16px;font-weight:500;color:var(--wh);flex:1;
+  font-family:'Playfair Display',serif;font-style:italic;
+}
+.objection-badge{
+  font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+  padding:4px 10px;border-radius:100px;
+  background:rgba(231,76,60,0.15);color:#E74C3C;white-space:nowrap;
+}
+.objection-a{
+  display:none;padding:0 24px 24px;
+}
+.objection.open .objection-a{display:block}
+.method-steps{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:8px;
+  margin-bottom:20px;
+}
+.method-step{
+  background:var(--dk3);border-radius:10px;padding:12px;text-align:center;
+}
+.method-step-n{
+  font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--or);
+}
+.method-step-t{font-size:11px;color:var(--gray);font-weight:600;letter-spacing:1px;text-transform:uppercase}
+.response-box{
+  background:var(--dk3);border-radius:12px;padding:20px 22px;
+  border-left:3px solid var(--success);margin-bottom:12px;
+}
+.response-label{
+  font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  color:var(--success);margin-bottom:8px;
+}
+.response-text{
+  font-size:14px;color:var(--wh);line-height:1.7;
+  font-family:'Playfair Display',serif;font-style:italic;
+}
+
+/* ── FOLLOW-UP ── */
+.followup-tabs{display:flex;gap:8px;margin-bottom:32px;flex-wrap:wrap}
+.followup-tab{
+  padding:10px 20px;border-radius:100px;
+  font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;
+  cursor:pointer;border:1px solid rgba(255,255,255,0.1);
+  color:var(--gray);transition:all 0.2s;
+}
+.followup-tab.active,.followup-tab:hover{
+  background:var(--or);color:var(--wh);border-color:var(--or);
+}
+.followup-content{display:none}
+.followup-content.active{display:block}
+.timeline{position:relative;padding-left:32px}
+.timeline::before{
+  content:'';position:absolute;left:8px;top:0;bottom:0;
+  width:2px;background:rgba(232,93,36,0.2);
+}
+.timeline-item{position:relative;margin-bottom:28px}
+.timeline-dot{
+  position:absolute;left:-28px;top:4px;
+  width:16px;height:16px;border-radius:50%;
+  background:var(--dk);border:2px solid var(--or);
+}
+.timeline-dot.done{background:var(--or)}
+.timeline-time{
+  font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  color:var(--or);margin-bottom:4px;
+}
+.timeline-title{font-size:15px;font-weight:600;color:var(--wh);margin-bottom:6px}
+.timeline-msg{
+  background:var(--dk3);border-radius:10px;padding:14px 16px;
+  font-size:13px;color:var(--gray);line-height:1.7;
+  font-family:'Playfair Display',serif;font-style:italic;
+  border:1px solid rgba(255,255,255,0.06);
+}
+
+/* ── CHECKLIST ── */
+.checklist{display:flex;flex-direction:column;gap:12px}
+.check-item{
+  display:flex;align-items:flex-start;gap:14px;
+  padding:18px 20px;border-radius:12px;
+  background:var(--dk2);border:1px solid rgba(255,255,255,0.06);
+  cursor:pointer;transition:all 0.2s;
+}
+.check-item:hover{border-color:rgba(232,93,36,0.3)}
+.check-item.checked{
+  background:rgba(46,204,113,0.05);
+  border-color:rgba(46,204,113,0.3);
+}
+.check-box{
+  width:22px;height:22px;border-radius:6px;
+  border:2px solid rgba(255,255,255,0.15);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;margin-top:1px;transition:all 0.2s;
+}
+.check-item.checked .check-box{
+  background:var(--success);border-color:var(--success);
+}
+.check-mark{display:none;color:white;font-size:13px;font-weight:700}
+.check-item.checked .check-mark{display:block}
+.check-text{font-size:14px;color:var(--wh);line-height:1.6}
+.check-item.checked .check-text{color:var(--gray)}
+.check-progress{
+  display:flex;align-items:center;gap:12px;margin-bottom:24px;
+}
+.check-progress-bar{
+  flex:1;height:6px;background:rgba(255,255,255,0.08);border-radius:3px;overflow:hidden;
+}
+.check-progress-fill{
+  height:100%;background:var(--or);border-radius:3px;
+  transition:width 0.4s ease;width:0%;
+}
+.check-progress-text{font-size:13px;color:var(--gray);white-space:nowrap}
+
+/* ── METRICS ── */
+.metrics-row{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:16px;margin-bottom:48px;
+}
+.metric-card{
+  background:var(--dk2);border-radius:16px;
+  padding:28px 24px;
+  border:1px solid rgba(255,255,255,0.06);
+  position:relative;overflow:hidden;
+}
+.metric-card::after{
+  content:'';position:absolute;
+  top:-30px;right:-30px;
+  width:80px;height:80px;
+  background:rgba(232,93,36,0.08);
+  border-radius:50%;
+}
+.metric-num{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:52px;line-height:1;
+  color:var(--or);margin-bottom:8px;
+}
+.metric-label{font-size:13px;color:var(--gray);font-weight:500}
+.metric-sub{font-size:11px;color:rgba(138,138,138,0.6);margin-top:4px}
+
+/* ── CTA ── */
+.cta-section{
+  padding:100px 60px;
+  background:linear-gradient(135deg,rgba(232,93,36,0.08) 0%,transparent 60%);
+  border-top:1px solid rgba(255,255,255,0.06);
+  text-align:center;
+}
+.cta-title{
+  font-family:'Bebas Neue',sans-serif;
+  font-size:clamp(48px,6vw,80px);
+  color:var(--wh);margin-bottom:16px;letter-spacing:-1px;
+}
+.cta-title span{color:var(--or)}
+.cta-sub{font-size:18px;color:var(--gray);max-width:500px;margin:0 auto 40px;}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:18px 36px;border-radius:100px;
+  background:var(--or);color:var(--wh);
+  font-size:14px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+  text-decoration:none;border:none;cursor:pointer;
+  transition:all 0.2s;
+}
+.btn:hover{background:var(--or2);transform:translateY(-2px)}
+
+/* ── TOAST ── */
+.toast{
+  position:fixed;bottom:32px;right:32px;z-index:1000;
+  background:var(--dk2);border:1px solid rgba(232,93,36,0.4);
+  color:var(--wh);padding:14px 20px;border-radius:12px;
+  font-size:14px;font-weight:500;
+  transform:translateY(100px);opacity:0;transition:all 0.3s;
+  pointer-events:none;
+}
+.toast.show{transform:translateY(0);opacity:1}
+
+/* ── PROGRESS BAR TOP ── */
+.progress-bar{
+  position:fixed;top:0;left:0;z-index:200;
+  height:3px;background:var(--or);
+  width:0%;transition:width 0.1s;
+}
+
+/* ── RESPONSIVE ── */
+@media(max-width:768px){
+  .hero,.section{padding:60px 24px}
+  .nav{padding:0 24px}
+  .full-divider{margin:0 24px}
+  .hero-num{display:none}
+  .method-steps{grid-template-columns:repeat(2,1fr)}
+  .cta-section{padding:60px 24px}
+  .script-body{padding:0 20px 20px 20px}
+}
+
+/* ── ANIMATE IN ── */
+.fade-in{opacity:0;transform:translateY(24px);transition:opacity 0.6s ease,transform 0.6s ease}
+.fade-in.visible{opacity:1;transform:translateY(0)}
+
+/* ── COPY BUTTON ── */
+.copy-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:6px 14px;border-radius:100px;
+  background:rgba(255,255,255,0.06);color:var(--gray);
+  font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;
+  border:none;cursor:pointer;transition:all 0.2s;margin-top:12px;
+}
+.copy-btn:hover{background:rgba(232,93,36,0.15);color:var(--or)}
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progressBar"></div>
+<div class="toast" id="toast"></div>
+
+<!-- ── HERO ── -->
+<section class="hero" id="top">
+  <div class="hero-tag">
+    <span></span>
+    Método C.L.A.R.O. · Descompliquei Marketing
+  </div>
+  <h1>GUIA<br><span>COMERCIAL</span><br>COMPLETO</h1>
+  <p class="hero-sub">Tudo que você precisa para transformar seu atendimento em máquina de conversão</p>
+  <div class="hero-meta">
+    <div class="hero-meta-item">
+      <span>Módulos</span>
+      <span>5 Pilares</span>
+    </div>
+    <div class="hero-meta-item">
+      <span>Objeções</span>
+      <span>6 Respostas</span>
+    </div>
+    <div class="hero-meta-item">
+      <span>Scripts</span>
+      <span>Prontos para usar</span>
+    </div>
+    <div class="hero-meta-item">
+      <span>Follow-Up</span>
+      <span>4 Cadências</span>
+    </div>
+  </div>
+  <div class="hero-num">01</div>
+</section>
+
+<!-- ── NAV ── -->
+<nav class="nav">
+  <div class="nav-logo">DESC.</div>
+  <a class="nav-item" href="#funil">Funil</a>
+  <a class="nav-item" href="#script">Script</a>
+  <a class="nav-item" href="#objecoes">Objeções</a>
+  <a class="nav-item" href="#followup">Follow-Up</a>
+  <a class="nav-item" href="#metricas">Métricas</a>
+  <a class="nav-item" href="#checklist">Checklist</a>
+</nav>
+
+<!-- ── FUNIL ── -->
+<section class="section fade-in" id="funil">
+  <div class="section-label">01 — Visão Geral</div>
+  <h2 class="section-title">O <span>FUNIL</span><br>COMERCIAL</h2>
+  <p class="section-lead">Cada lead percorre 7 etapas antes de se tornar paciente fidelizado. Saber onde cada um está é o que separa quem converte de quem improvisa.</p>
+
+  <div class="funnel">
+    <div class="funnel-step">
+      <div class="funnel-num">01</div>
+      <div class="funnel-body">
+        <div class="funnel-title">Lead Gerado</div>
+        <div class="funnel-desc">O contato chega — pelo anúncio, indicação ou orgânico. O que você faz nos primeiros 5 minutos define 80% da chance de conversão.</div>
+        <span class="funnel-badge">⚡ Velocidade é tudo aqui</span>
+      </div>
+    </div>
+    <div class="funnel-step">
+      <div class="funnel-num">02</div>
+      <div class="funnel-body">
+        <div class="funnel-title">Qualificação</div>
+        <div class="funnel-desc">Entender se é o perfil certo. Não todo lead é o seu paciente ideal — e tentar converter o perfil errado custa tempo e energia.</div>
+        <span class="funnel-badge">🎯 ICP em ação</span>
+      </div>
+    </div>
+    <div class="funnel-step">
+      <div class="funnel-num">03</div>
+      <div class="funnel-body">
+        <div class="funnel-title">Atendimento</div>
+        <div class="funnel-desc">A conversa de diagnóstico e apresentação de valor. Aqui mora o maior erro: falar de procedimento antes de entender o que o paciente realmente quer.</div>
+        <span class="funnel-badge">🗣️ Script = estrutura</span>
+      </div>
+    </div>
+    <div class="funnel-step">
+      <div class="funnel-num">04</div>
+      <div class="funnel-body">
+        <div class="funnel-title">Proposta</div>
+        <div class="funnel-desc">Apresentação do preço e condição. O preço não pode vir antes do valor. Quando vem depois, a conversa já está ganha.</div>
+        <span class="funnel-badge">💰 Valor antes de preço</span>
+      </div>
+    </div>
+    <div class="funnel-step">
+      <div class="funnel-num">05</div>
+      <div class="funnel-body">
+        <div class="funnel-title">Fechamento</div>
+        <div class="funnel-desc">Conduzir para o sim — com técnica, não pressão. O paciente que decide sozinho decide pela inércia, que é não. Você precisa conduzir.</div>
+        <span class="funnel-badge">✅ OU, OU sempre</span>
+      </div>
+    </div>
+    <div class="funnel-step">
+      <div class="funnel-num">06</div>
+      <div class="funnel-body">
+        <div class="funnel-title">Follow-Up</div>
+        <div class="funnel-desc">Quem não fechou hoje não disse não — disse ainda não. A maioria dos fechamentos acontece entre o 2º e o 5º contato. A maioria desiste no 1º.</div>
+        <span class="funnel-badge">🔁 Cadência = dinheiro</span>
+      </div>
+    </div>
+    <div class="funnel-step">
+      <div class="funnel-num">07</div>
+      <div class="funnel-body">
+        <div class="funnel-title">Fidelização</div>
+        <div class="funnel-desc">O paciente que volta e indica é o ativo mais valioso da sua clínica. LTV alto = crescimento sem depender só de leads novos.</div>
+        <span class="funnel-badge">♾️ Recorrência = escala</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="full-divider"></div>
+
+<!-- ── SCRIPT ── -->
+<section class="section fade-in" id="script">
+  <div class="section-label">02 — Script de Atendimento</div>
+  <h2 class="section-title">AS 5<br><span>ETAPAS</span><br>DO SCRIPT</h2>
+  <p class="section-lead">Script não é robotizar. É ter estrutura para não esquecer nada importante — como o checklist de um piloto. Adapte ao seu estilo, mas respeite a sequência.</p>
+
+  <div class="script-steps">
+
+    <div class="script-step open" onclick="toggleStep(this)">
+      <div class="script-header">
+        <div class="script-step-num">01</div>
+        <div class="script-icon">🤝</div>
+        <div class="script-step-title">Abertura e Rapport</div>
+        <div class="script-step-time">3 min</div>
+        <svg class="script-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="script-body">
+        <p class="script-desc">Os primeiros 3 minutos definem se o paciente vai confiar em você ou ficar na defensiva. Conexão genuína antes de qualquer coisa técnica.</p>
+        <div class="tag-row">
+          <span class="tag tag-do">✓ Faça</span>
+        </div>
+        <div class="tips-grid">
+          <div class="tip-card"><div class="tip-card-icon">👋</div><div class="tip-card-title">Pergunte o nome logo</div><div class="tip-card-desc">E use o nome da pessoa no decorrer da conversa. Isso cria conexão real, não parece roteiro.</div></div>
+          <div class="tip-card"><div class="tip-card-icon">🎯</div><div class="tip-card-title">Uma pergunta de quebra-gelo</div><div class="tip-card-desc">"Você é daqui da região?" / "Como você nos encontrou?" — cria conversa antes da consulta.</div></div>
+          <div class="tip-card"><div class="tip-card-icon">⏳</div><div class="tip-card-title">Não fale de procedimento ainda</div><div class="tip-card-desc">O maior erro é começar falando do catálogo. Primeiro, a pessoa. Depois, a solução.</div></div>
+        </div>
+        <div class="exemplo-box">
+          <div class="exemplo-label">✓ Exemplo</div>
+          <div class="exemplo-text">"Olá, [Nome]! Seja bem-vinda. Fico muito feliz que tenha vindo. Me conta um pouquinho sobre você — é a primeira vez aqui na clínica?"</div>
+        </div>
+        <button class="copy-btn" onclick="copyText('Olá, [Nome]! Seja bem-vinda. Fico muito feliz que tenha vindo. Me conta um pouquinho sobre você — é a primeira vez aqui na clínica?')">📋 Copiar exemplo</button>
+      </div>
+    </div>
+
+    <div class="script-step" onclick="toggleStep(this)">
+      <div class="script-header">
+        <div class="script-step-num">02</div>
+        <div class="script-icon">🔍</div>
+        <div class="script-step-title">Diagnóstico</div>
+        <div class="script-step-time">8–12 min</div>
+        <svg class="script-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="script-body">
+        <p class="script-desc">A etapa mais subestimada e mais poderosa do atendimento. Quem faz as melhores perguntas vence. O diagnóstico é o que vai permitir você apresentar a solução certa — não o catálogo genérico.</p>
+        <div class="tag-row">
+          <span class="tag tag-do">✓ Perguntas essenciais</span>
+        </div>
+        <div class="tips-grid">
+          <div class="tip-card"><div class="tip-card-icon">💬</div><div class="tip-card-title">"O que te trouxe até aqui hoje?"</div><div class="tip-card-desc">A pergunta mais importante. Deixe ela responder completamente. Não interrompa.</div></div>
+          <div class="tip-card"><div class="tip-card-icon">🕐</div><div class="tip-card-title">"Há quanto tempo você pensa nisso?"</div><div class="tip-card-desc">Revela o nível de urgência e maturidade da decisão.</div></div>
+          <div class="tip-card"><div class="tip-card-icon">🔄</div><div class="tip-card-title">"Já tentou alguma coisa antes?"</div><div class="tip-card-desc">Identifica tentativas anteriores — e por que não funcionaram.</div></div>
+          <div class="tip-card"><div class="tip-card-icon">🎯</div><div class="tip-card-title">"Como você quer se sentir depois?"</div><div class="tip-card-desc">A resposta aqui é o que você vai usar no fechamento. Anote.</div></div>
+        </div>
+        <div class="exemplo-box">
+          <div class="exemplo-label">✓ Sequência de diagnóstico</div>
+          <div class="exemplo-text">"O que te trouxe até aqui hoje?" → ouvir com atenção → "Há quanto tempo você pensa nisso?" → "O que você já tentou antes?" → "Como você quer se sentir depois que resolver isso?"</div>
+        </div>
+        <div class="exemplo-box dont" style="margin-top:10px">
+          <div class="exemplo-label">✗ Nunca faça isso</div>
+          <div class="exemplo-text">"Você tem interesse em harmonização, botox, preenchimento, bichectomia ou lifting?" — nunca liste o menu. Você está atendendo, não apresentando cardápio.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="script-step" onclick="toggleStep(this)">
+      <div class="script-header">
+        <div class="script-step-num">03</div>
+        <div class="script-icon">💎</div>
+        <div class="script-step-title">Apresentação de Valor</div>
+        <div class="script-step-time">5–8 min</div>
+        <svg class="script-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="script-body">
+        <p class="script-desc">Apresente a solução com base no diagnóstico — não no catálogo. O paciente compra resultado, não procedimento. Use as próprias palavras que ela usou para descrever o problema.</p>
+        <div class="tag-row">
+          <span class="tag tag-do">✓ Faça</span>
+          <span class="tag tag-dont">✗ Evite</span>
+        </div>
+        <div class="tips-grid">
+          <div class="tip-card"><div class="tip-card-icon">🔗</div><div class="tip-card-title">Conecte ao diagnóstico</div><div class="tip-card-desc">"Com base no que você me contou sobre [problema específico], o que vai funcionar para o seu caso é..."</div></div>
+          <div class="tip-card"><div class="tip-card-icon">👁️</div><div class="tip-card-title">Fale em resultado, não técnica</div><div class="tip-card-desc">"Você vai ficar com o rosto mais descansado e natural" — não "vou aplicar 20 unidades de toxina botulínica".</div></div>
+          <div class="tip-card"><div class="tip-card-icon">🛡️</div><div class="tip-card-title">Gere segurança antes do preço</div><div class="tip-card-desc">Mencione casos similares, resultados consistentes, sua experiência. O preço vem depois.</div></div>
+        </div>
+        <div class="exemplo-box">
+          <div class="exemplo-label">✓ Estrutura da apresentação</div>
+          <div class="exemplo-text">"Com base no que você me contou, o que faz mais sentido para você é [solução]. Com isso, você vai [resultado concreto em palavras dela]. Costumo tratar pacientes com esse perfil e o resultado costuma aparecer em [prazo]. Quer saber como funciona o processo?"</div>
+        </div>
+        <button class="copy-btn" onclick="copyText('Com base no que você me contou, o que faz mais sentido para você é [solução]. Com isso, você vai [resultado concreto]. Costumo tratar pacientes com esse perfil e o resultado costuma aparecer em [prazo]. Quer saber como funciona o processo?')">📋 Copiar estrutura</button>
+      </div>
+    </div>
+
+    <div class="script-step" onclick="toggleStep(this)">
+      <div class="script-header">
+        <div class="script-step-num">04</div>
+        <div class="script-icon">💰</div>
+        <div class="script-step-title">Apresentação do Preço</div>
+        <div class="script-step-time">2–3 min</div>
+        <svg class="script-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="script-body">
+        <p class="script-desc">O preço apresentado com autoridade não gera desconforto. O problema não é o valor — é apresentar o preço antes de estabelecer o valor. Quando o valor está claro, o preço é consequência.</p>
+        <div class="tag-row">
+          <span class="tag tag-tip">💡 Regra de ouro</span>
+        </div>
+        <div class="tips-grid">
+          <div class="tip-card"><div class="tip-card-icon">🤐</div><div class="tip-card-title">Silêncio após o preço</div><div class="tip-card-desc">Fale o preço e pare. Não preencha o silêncio com justificativas. Quem fala primeiro perde.</div></div>
+          <div class="tip-card"><div class="tip-card-icon">⚓</div><div class="tip-card-title">Âncora de valor antes</div><div class="tip-card-desc">Antes do preço: "o resultado que você vai ter é [X]". O preço fica pequeno comparado ao benefício.</div></div>
+          <div class="tip-card"><div class="tip-card-icon">💳</div><div class="tip-card-title">Apresente condição, não desconto</div><div class="tip-card-desc">"Posso parcelar em X vezes" é diferente de dar desconto. Mantenha o posicionamento.</div></div>
+        </div>
+        <div class="exemplo-box">
+          <div class="exemplo-label">✓ Como apresentar o preço</div>
+          <div class="exemplo-text">"O investimento para esse protocolo é de R$ [valor]." — e para. Não adicione "mas..." ou "é um pouquinho caro porque...". Apresente com firmeza e naturalidade.</div>
+        </div>
+        <div class="exemplo-box dont" style="margin-top:10px">
+          <div class="exemplo-label">✗ Nunca diga assim</div>
+          <div class="exemplo-text">"Então... é que o preço é R$ [valor], mas é que tem muito produto de qualidade e eu me especializo muito, então por isso fica nesse valor..." — transmite insegurança.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="script-step" onclick="toggleStep(this)">
+      <div class="script-header">
+        <div class="script-step-num">05</div>
+        <div class="script-icon">🎯</div>
+        <div class="script-step-title">Fechamento e Próximo Passo</div>
+        <div class="script-step-time">3–5 min</div>
+        <svg class="script-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="script-body">
+        <p class="script-desc">Todo atendimento deve terminar com uma ação definida. O paciente que vai "pensar" sem uma data ou compromisso concreto raramente volta. Você conduz — não pressiona.</p>
+        <div class="tag-row">
+          <span class="tag tag-do">✓ Técnicas de fechamento</span>
+        </div>
+        <div class="tips-grid">
+          <div class="tip-card"><div class="tip-card-icon">🔀</div><div class="tip-card-title">Técnica OU, OU</div><div class="tip-card-desc">Nunca "você quer agendar?" — a resposta fácil é não. Sempre: "você prefere terça de manhã ou quinta à tarde?"</div></div>
+          <div class="tip-card"><div class="tip-card-icon">🔗</div><div class="tip-card-title">Ancoragem do diagnóstico</div><div class="tip-card-desc">Use as palavras dela: "dado o que você me contou sobre [X], começar agora garante [resultado] para [data importante]."</div></div>
+          <div class="tip-card"><div class="tip-card-icon">📝</div><div class="tip-card-title">Sinal/entrada para garantir</div><div class="tip-card-desc">"Para garantir sua data, fazemos uma entrada de R$ [valor] e o restante na consulta." Compromisso real.</div></div>
+          <div class="tip-card"><div class="tip-card-icon">📊</div><div class="tip-card-title">Fechamento por resumo</div><div class="tip-card-desc">Recapitule: diagnóstico → solução → resultado → "o que falta para a gente começar?"</div></div>
+        </div>
+        <div class="exemplo-box">
+          <div class="exemplo-label">✓ Fechamento OU, OU</div>
+          <div class="exemplo-text">"Você prefere começar na próxima semana ou na semana seguinte? Tenho horário na terça de manhã ou na quinta à tarde."</div>
+        </div>
+        <div class="exemplo-box" style="margin-top:10px">
+          <div class="exemplo-label">✓ Fechamento por ancoragem</div>
+          <div class="exemplo-text">"Você me contou que quer estar bem para o seu aniversário em setembro. Começando agora, temos tempo ideal para o resultado aparecer completamente. O que falta para a gente garantir sua data?"</div>
+        </div>
+        <button class="copy-btn" onclick="copyText('Você prefere começar na próxima semana ou na semana seguinte? Tenho horário na terça de manhã ou na quinta à tarde.')">📋 Copiar OU, OU</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="full-divider"></div>
+
+<!-- ── OBJEÇÕES ── -->
+<section class="section fade-in" id="objecoes">
+  <div class="section-label">03 — Quebra de Objeções</div>
+  <h2 class="section-title">AS 6<br><span>OBJEÇÕES</span><br>MAIS COMUNS</h2>
+  <p class="section-lead">Objeção não é rejeição — é pedido de mais informação. A maioria das objeções é sobre confiança, não sobre preço. Use sempre a estrutura: <strong>Acolher → Investigar → Responder → Confirmar.</strong></p>
+
+  <div class="method-steps" style="margin-bottom:40px">
+    <div class="method-step"><div class="method-step-n">A</div><div class="method-step-t">Acolher</div></div>
+    <div class="method-step"><div class="method-step-n">I</div><div class="method-step-t">Investigar</div></div>
+    <div class="method-step"><div class="method-step-n">R</div><div class="method-step-t">Responder</div></div>
+    <div class="method-step"><div class="method-step-n">C</div><div class="method-step-t">Confirmar</div></div>
+  </div>
+
+  <div class="objection-grid">
+
+    <div class="objection" onclick="toggleObj(this)">
+      <div class="objection-q">
+        <div style="font-size:20px">💸</div>
+        <div class="objection-quote">"Está caro"</div>
+        <div class="objection-badge">Mais comum</div>
+        <svg style="width:18px;height:18px;color:#8A8A8A;flex-shrink:0;transition:transform 0.3s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="obj-chevron"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="objection-a">
+        <div class="response-box">
+          <div class="response-label">✓ Resposta estruturada</div>
+          <div class="response-text">"Entendo completamente — investimento em saúde e estética é uma decisão importante. Me conta, [Nome]: o que você esperava investir? Assim consigo te mostrar as opções que fazem mais sentido para você."</div>
+        </div>
+        <div class="tips-grid">
+          <div class="tip-card"><div class="tip-card-icon">🔍</div><div class="tip-card-title">Investigue antes de defender</div><div class="tip-card-desc">Pergunte o que ela esperava pagar. A objeção de preço quase sempre esconde outra coisa.</div></div>
+          <div class="tip-card"><div class="tip-card-icon">⚓</div><div class="tip-card-title">Reapresente o valor</div><div class="tip-card-desc">Volte ao que ela disse no diagnóstico. "Você me contou que [dor]. O preço do [problema continuar] é maior."</div></div>
+          <div class="tip-card"><div class="tip-card-icon">💳</div><div class="tip-card-title">Ofereça condição, não desconto</div><div class="tip-card-desc">"Posso parcelar em X vezes sem juros" preserva seu posicionamento e facilita a decisão.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="objection" onclick="toggleObj(this)">
+      <div class="objection-q">
+        <div style="font-size:20px">🤔</div>
+        <div class="objection-quote">"Vou pensar"</div>
+        <div class="objection-badge">Alta frequência</div>
+        <svg style="width:18px;height:18px;color:#8A8A8A;flex-shrink:0;transition:transform 0.3s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="obj-chevron"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="objection-a">
+        <div class="response-box">
+          <div class="response-label">✓ Resposta estruturada</div>
+          <div class="response-text">"Completamente normal querer pensar bem! Me ajuda a entender: o que especificamente você ainda precisa decidir? É sobre o procedimento em si, o momento certo ou outra coisa?"</div>
+        </div>
+        <div class="tips-grid">
+          <div class="tip-card"><div class="tip-card-icon">🔦</div><div class="tip-card-title">Descubra o real bloqueio</div><div class="tip-card-desc">"Vou pensar" é uma esquiva. Sempre pergunte sobre o que especificamente ela precisa pensar.</div></div>
+          <div class="tip-card"><div class="tip-card-icon">⏰</div><div class="tip-card-title">Urgência real, não inventada</div><div class="tip-card-desc">Use sua agenda real: "Minha agenda para este mês está quase cheia. Se quiser garantir, precisamos definir hoje."</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="objection" onclick="toggleObj(this)">
+      <div class="objection-q">
+        <div style="font-size:20px">👫</div>
+        <div class="objection-quote">"Preciso falar com meu marido"</div>
+        <div class="objection-badge">Decisão compartilhada</div>
+        <svg style="width:18px;height:18px;color:#8A8A8A;flex-shrink:0;transition:transform 0.3s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="obj-chevron"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="objection-a">
+        <div class="response-box">
+          <div class="response-label">✓ Resposta estruturada</div>
+          <div class="response-text">"Faz todo sentido! O que você precisaria me contar para que ele entendesse o valor disso para você? Assim consigo te ajudar a ter essa conversa com clareza."</div>
+        </div>
+        <div class="tips-grid">
+          <div class="tip-card"><div class="tip-card-icon">🤝</div><div class="tip-card-title">Inclua o decisor</div><div class="tip-card-desc">Ajude ela a vender para o marido. Dê argumentos, não pressione diretamente.</div></div>
+          <div class="tip-card"><div class="tip-card-icon">📱</div><div class="tip-card-title">Proponha uma conversa a três</div><div class="tip-card-desc">"Posso fazer uma ligação com vocês dois se ajudar? Assim respondo as dúvidas dele diretamente."</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="objection" onclick="toggleObj(this)">
+      <div class="objection-q">
+        <div style="font-size:20px">😰</div>
+        <div class="objection-quote">"Tenho medo / não sei se é para mim"</div>
+        <div class="objection-badge">Objeção emocional</div>
+        <svg style="width:18px;height:18px;color:#8A8A8A;flex-shrink:0;transition:transform 0.3s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="obj-chevron"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="objection-a">
+        <div class="response-box">
+          <div class="response-label">✓ Resposta estruturada</div>
+          <div class="response-text">"Esse medo é muito comum e completamente válido! Me conta: o que especificamente te preocupa? Porque dependendo do que for, posso te mostrar como a gente lida com isso aqui."</div>
+        </div>
+        <div class="tips-grid">
+          <div class="tip-card"><div class="tip-card-icon">💙</div><div class="tip-card-title">Acolhimento primeiro</div><div class="tip-card-desc">Esta é a objeção mais emocional. Valide o sentimento ANTES de qualquer argumento técnico.</div></div>
+          <div class="tip-card"><div class="tip-card-icon">👥</div><div class="tip-card-title">Prova social específica</div><div class="tip-card-desc">Conte sobre pacientes com perfil similar. O medo diminui quando ela se vê no resultado de outra pessoa.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="objection" onclick="toggleObj(this)">
+      <div class="objection-q">
+        <div style="font-size:20px">📍</div>
+        <div class="objection-quote">"Já faço em outro lugar"</div>
+        <div class="objection-badge">Concorrência</div>
+        <svg style="width:18px;height:18px;color:#8A8A8A;flex-shrink:0;transition:transform 0.3s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="obj-chevron"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="objection-a">
+        <div class="response-box">
+          <div class="response-label">✓ Resposta estruturada</div>
+          <div class="response-text">"Que ótimo que você já cuida de você! O que te trouxe então até aqui hoje? Você está buscando algo diferente ou é curiosidade mesmo?"</div>
+        </div>
+        <div class="tips-grid">
+          <div class="tip-card"><div class="tip-card-icon">🚫</div><div class="tip-card-title">Nunca critique o concorrente</div><div class="tip-card-desc">Denegrir outro profissional rebaixa você também. Posicione seu diferencial — não ataque o outro.</div></div>
+          <div class="tip-card"><div class="tip-card-icon">❓</div><div class="tip-card-title">Descubra por que ela veio</div><div class="tip-card-desc">Se ela está buscando outra opção, há um motivo. Encontre esse motivo — ele é sua abertura.</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="objection" onclick="toggleObj(this)">
+      <div class="objection-q">
+        <div style="font-size:20px">📅</div>
+        <div class="objection-quote">"Vou esperar um pouco mais"</div>
+        <div class="objection-badge">Sem urgência</div>
+        <svg style="width:18px;height:18px;color:#8A8A8A;flex-shrink:0;transition:transform 0.3s" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="obj-chevron"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="objection-a">
+        <div class="response-box">
+          <div class="response-label">✓ Resposta estruturada</div>
+          <div class="response-text">"Claro! Curiosidade: o que está esperando passar? Pergunto porque dependendo do que for, pode ser que esperar não ajude tanto — ou pode ser a decisão certa. Quero entender sua situação."</div>
+        </div>
+        <div class="tips-grid">
+          <div class="tip-card"><div class="tip-card-icon">🔍</div><div class="tip-card-title">Identifique o real bloqueio</div><div class="tip-card-desc">"Esperar" quase sempre esconde medo, dúvida sobre resultado ou questão financeira. Investigue.</div></div>
+          <div class="tip-card"><div class="tip-card-icon">📆</div><div class="tip-card-title">Crie contexto de urgência real</div><div class="tip-card-desc">Se ela tem um evento importante, calcule: "para estar com o resultado completo até [data], precisaria começar agora."</div></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="full-divider"></div>
+
+<!-- ── FOLLOW-UP ── -->
+<section class="section fade-in" id="followup">
+  <div class="section-label">04 — Cadências de Follow-Up</div>
+  <h2 class="section-title">O FOLLOW<br><span>QUE</span><br>CONVERTE</h2>
+  <p class="section-lead">A maioria dos fechamentos acontece entre o 2º e o 5º contato. A maioria das clínicas desiste no 1º. O follow-up simples e no timing certo vale mais que um script elaborado fora de hora.</p>
+
+  <div class="followup-tabs">
+    <div class="followup-tab active" onclick="switchTab('nunca')">Nunca respondeu</div>
+    <div class="followup-tab" onclick="switchTab('parou-qualif')">Parou na qualificação</div>
+    <div class="followup-tab" onclick="switchTab('parou-preco')">Parou no preço</div>
+    <div class="followup-tab" onclick="switchTab('vai-pensar')">Disse "vou pensar"</div>
+  </div>
+
+  <div class="followup-content active" id="tab-nunca">
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot done"></div>
+        <div class="timeline-time">⚡ 30 minutos após o silêncio</div>
+        <div class="timeline-title">Reengajamento imediato</div>
+        <div class="timeline-msg">"Oi 👋"<br><em style="font-size:12px;color:#8A8A8A">(sim, só isso. Simplicidade chama atenção. Não explique.)</em></div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot done"></div>
+        <div class="timeline-time">2 horas depois</div>
+        <div class="timeline-title">Contexto leve</div>
+        <div class="timeline-msg">"Vi que você se interessou por [procedimento]. Posso te contar mais sobre como funciona aqui na clínica?"</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-time">D+1</div>
+        <div class="timeline-title">Conteúdo de valor</div>
+        <div class="timeline-msg">"[Nome], separei essa informação sobre [procedimento] que pode te ajudar a entender melhor. [conteúdo ou resultado de paciente similar]"</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-time">D+3</div>
+        <div class="timeline-title">Última tentativa ativa</div>
+        <div class="timeline-msg">"Minha agenda essa semana está se preenchendo, mas ainda tenho um horário disponível se quiser conversar."</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="followup-content" id="tab-parou-qualif">
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot done"></div>
+        <div class="timeline-time">⚡ 30 minutos</div>
+        <div class="timeline-title">Retomada suave</div>
+        <div class="timeline-msg">"Ficou por aqui? 😊"</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot done"></div>
+        <div class="timeline-time">2 horas</div>
+        <div class="timeline-title">Retomar do ponto exato</div>
+        <div class="timeline-msg">"Você havia me contado que [última informação que deu]. Queria entender melhor como posso te ajudar com isso."</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-time">D+1</div>
+        <div class="timeline-title">Valor relacionado ao interesse</div>
+        <div class="timeline-msg">"[Nome], lembrei de você quando vi esse resultado de uma paciente com um caso bem parecido com o que você me descreveu. [caso/resultado]"</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-time">D+3</div>
+        <div class="timeline-title">OU, OU para agendar</div>
+        <div class="timeline-msg">"Tenho horário na quarta de manhã ou na sexta à tarde. Qual funciona melhor para você?"</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="followup-content" id="tab-parou-preco">
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot done"></div>
+        <div class="timeline-time">⚡ 30 minutos</div>
+        <div class="timeline-title">Abertura sem pressão</div>
+        <div class="timeline-msg">"Oi! Ficou alguma dúvida sobre o que conversamos? 😊"</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot done"></div>
+        <div class="timeline-time">2 horas</div>
+        <div class="timeline-title">Antecipar a objeção</div>
+        <div class="timeline-msg">"Às vezes fica difícil avaliar o investimento sem ver o resultado mais de perto. Posso te mostrar alguns casos de pacientes com o seu perfil?"</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-time">D+1</div>
+        <div class="timeline-title">Prova social</div>
+        <div class="timeline-msg">"[Nome], uma paciente com um caso muito parecido com o seu passou por cá semana passada. O resultado dela foi [resultado]. Acho que vai te dar clareza."</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-time">D+3</div>
+        <div class="timeline-title">OU, OU com urgência real</div>
+        <div class="timeline-msg">"Tenho horário na quarta de manhã ou na sexta à tarde para conversarmos melhor. Qual funciona para você?"</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-time">D+7</div>
+        <div class="timeline-title">Última tentativa ativa</div>
+        <div class="timeline-msg">"[Nome], não quero que essa oportunidade passe sem você ter todas as informações. Minha agenda está quase cheia essa semana. Podemos conversar hoje ou amanhã?"</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="followup-content" id="tab-vai-pensar">
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot done"></div>
+        <div class="timeline-time">D+1</div>
+        <div class="timeline-title">Apoio sem pressão</div>
+        <div class="timeline-msg">"Completamente normal querer pensar bem, [Nome]! Fico à disposição para qualquer dúvida que surgir. 😊"</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-time">D+3</div>
+        <div class="timeline-title">Conteúdo que resolve dúvida comum</div>
+        <div class="timeline-msg">"[Nome], vi que muitas pessoas que pensavam como você tinham a dúvida de [dúvida mais comum]. [Resposta ou depoimento de paciente]."</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-time">D+7</div>
+        <div class="timeline-title">Retomada direta</div>
+        <div class="timeline-msg">"[Nome], como ficou sua decisão? Ainda tenho horário disponível essa semana se quiser conversarmos."</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="timeline-time">D+14</div>
+        <div class="timeline-title">Último contato ativo</div>
+        <div class="timeline-msg">"[Nome], não quero ser invasiva — mas também não quero que você deixe de ter o resultado que quer por falta de informação. Estou aqui se precisar."</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="full-divider"></div>
+
+<!-- ── MÉTRICAS ── -->
+<section class="section fade-in" id="metricas">
+  <div class="section-label">05 — Métricas que Importam</div>
+  <h2 class="section-title">MEDIR<br><span>PARA</span><br>DECIDIR</h2>
+  <p class="section-lead">Sem números, você trabalha no escuro. As métricas certas revelam onde está o gargalo — e onde está o dinheiro que você está deixando na mesa.</p>
+
+  <div class="metrics-row">
+    <div class="metric-card">
+      <div class="metric-num">5min</div>
+      <div class="metric-label">Tempo máximo de resposta ao lead</div>
+      <div class="metric-sub">Após 5 min, a taxa de conversão cai drasticamente</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-num">30%</div>
+      <div class="metric-label">Taxa de conversão atendimento → fechamento</div>
+      <div class="metric-sub">Abaixo disso: problema no script ou no follow-up</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-num">3–5x</div>
+      <div class="metric-label">Contatos até o fechamento</div>
+      <div class="metric-sub">A maioria desiste no 1º — seja a que persiste</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-num">25%</div>
+      <div class="metric-label">Base inativa que responde à reativação</div>
+      <div class="metric-sub">Caixa que já está na mesa, esperando ser buscado</div>
+    </div>
+  </div>
+
+  <h3 style="font-size:20px;font-weight:600;color:#fff;margin-bottom:24px">Acompanhe semanalmente:</h3>
+  <div class="tips-grid">
+    <div class="tip-card"><div class="tip-card-icon">📊</div><div class="tip-card-title">CPL — Custo por Lead</div><div class="tip-card-desc">Quanto você está pagando por cada contato. Se subiu, verifique criativo primeiro, depois público.</div></div>
+    <div class="tip-card"><div class="tip-card-icon">📞</div><div class="tip-card-title">Taxa de Atendimento</div><div class="tip-card-desc">% de leads que chegam e viram atendimento. Problema aqui = velocidade de resposta ou qualificação.</div></div>
+    <div class="tip-card"><div class="tip-card-icon">✅</div><div class="tip-card-title">Taxa de Fechamento</div><div class="tip-card-desc">% de atendimentos que fecham. Problema aqui = script, preço ou objeções não tratadas.</div></div>
+    <div class="tip-card"><div class="tip-card-icon">💰</div><div class="tip-card-title">Ticket Médio</div><div class="tip-card-desc">Valor médio por paciente. Se está baixo: problema na apresentação de valor ou no portfólio de ofertas.</div></div>
+    <div class="tip-card"><div class="tip-card-icon">🔁</div><div class="tip-card-title">Taxa de Retorno</div><div class="tip-card-desc">% de pacientes que volta. Alta = fidelização funcionando. Baixa = experiência ou cadência de reativação fraca.</div></div>
+    <div class="tip-card"><div class="tip-card-icon">📣</div><div class="tip-card-title">Taxa de Indicação</div><div class="tip-card-desc">% de novos pacientes que veio por indicação. O melhor marketing é o que acontece depois do procedimento.</div></div>
+  </div>
+</section>
+
+<div class="full-divider"></div>
+
+<!-- ── CHECKLIST ── -->
+<section class="section fade-in" id="checklist">
+  <div class="section-label">06 — Checklist Diário</div>
+  <h2 class="section-title">ANTES<br><span>DE</span><br>ATENDER</h2>
+  <p class="section-lead">Os melhores atendentes não dependem de sorte ou inspiração. Eles têm processo. Use este checklist antes de cada atendimento para garantir que você está preparada.</p>
+
+  <div class="check-progress">
+    <div class="check-progress-bar"><div class="check-progress-fill" id="progressFill"></div></div>
+    <div class="check-progress-text" id="progressText">0 de 10 concluídos</div>
+  </div>
+
+  <div class="checklist" id="checklist">
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"><span class="check-mark">✓</span></div>
+      <div class="check-text"><strong>Revisei o histórico do lead</strong> — sei de onde veio, o que perguntou, qual procedimento interessa</div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"><span class="check-mark">✓</span></div>
+      <div class="check-text"><strong>Tenho o nome dela</strong> — e vou usar durante todo o atendimento</div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"><span class="check-mark">✓</span></div>
+      <div class="check-text"><strong>Sei minha proposta de valor</strong> — por que ela deve escolher minha clínica e não outra</div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"><span class="check-mark">✓</span></div>
+      <div class="check-text"><strong>Tenho as perguntas de diagnóstico na cabeça</strong> — vou entender antes de apresentar</div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"><span class="check-mark">✓</span></div>
+      <div class="check-text"><strong>Estou pronta para o silêncio após o preço</strong> — não vou preencher com justificativas</div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"><span class="check-mark">✓</span></div>
+      <div class="check-text"><strong>Tenho dois horários disponíveis para oferecer</strong> — para aplicar o OU, OU no fechamento</div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"><span class="check-mark">✓</span></div>
+      <div class="check-text"><strong>Sei minhas respostas às 3 objeções mais comuns</strong> — estou preparada, não vou improvisar</div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"><span class="check-mark">✓</span></div>
+      <div class="check-text"><strong>Tenho casos de pacientes similares para usar</strong> — prova social específica, não genérica</div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"><span class="check-mark">✓</span></div>
+      <div class="check-text"><strong>Sei o valor do sinal/entrada</strong> — para propor no fechamento de forma natural</div>
+    </div>
+    <div class="check-item" onclick="toggleCheck(this)">
+      <div class="check-box"><span class="check-mark">✓</span></div>
+      <div class="check-text"><strong>Tenho a cadência de follow-up pronta</strong> — se não fechar hoje, sei exatamente o que fazer amanhã</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ── -->
+<div class="cta-section">
+  <div class="hero-tag" style="margin:0 auto 32px;justify-content:center">
+    <span></span>Descompliquei Marketing
+  </div>
+  <h2 class="cta-title">PROCESSO É<br><span>LIBERDADE</span></h2>
+  <p class="cta-sub">Quando você tem método, não depende de sorte ou inspiração. Cada atendimento é uma oportunidade — e você está preparada para cada uma delas.</p>
+  <button class="btn" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    ↑ Voltar ao início
+  </button>
+</div>
+
+<script>
+// ── PROGRESS BAR ──
+window.addEventListener('scroll',()=>{
+  const d=document.documentElement;
+  const pct=(d.scrollTop/(d.scrollHeight-d.clientHeight))*100;
+  document.getElementById('progressBar').style.width=pct+'%';
+});
+
+// ── FADE IN ──
+const obs=new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')});
+},{threshold:0.1});
+document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+
+// ── NAV ACTIVE ──
+const sections=['funil','script','objecoes','followup','metricas','checklist'];
+window.addEventListener('scroll',()=>{
+  let cur='';
+  sections.forEach(id=>{
+    const el=document.getElementById(id);
+    if(el&&el.getBoundingClientRect().top<200)cur=id;
+  });
+  document.querySelectorAll('.nav-item').forEach(n=>{
+    n.classList.toggle('active',n.getAttribute('href')==='#'+cur);
+  });
+});
+
+// ── SCRIPT STEPS ──
+function toggleStep(el){
+  const wasOpen=el.classList.contains('open');
+  document.querySelectorAll('.script-step').forEach(s=>s.classList.remove('open'));
+  if(!wasOpen)el.classList.add('open');
+}
+
+// ── OBJECTIONS ──
+function toggleObj(el){
+  const wasOpen=el.classList.contains('open');
+  document.querySelectorAll('.objection').forEach(o=>{
+    o.classList.remove('open');
+    o.querySelector('.obj-chevron').style.transform='';
+  });
+  if(!wasOpen){
+    el.classList.add('open');
+    el.querySelector('.obj-chevron').style.transform='rotate(180deg)';
+  }
+}
+
+// ── FOLLOW-UP TABS ──
+function switchTab(id){
+  document.querySelectorAll('.followup-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.followup-content').forEach(c=>c.classList.remove('active'));
+  document.querySelector(`[onclick="switchTab('${id}')"]`).classList.add('active');
+  document.getElementById('tab-'+id).classList.add('active');
+}
+
+// ── CHECKLIST ──
+function toggleCheck(el){
+  el.classList.toggle('checked');
+  updateProgress();
+  if(el.classList.contains('checked'))showToast('✓ Item confirmado!');
+}
+function updateProgress(){
+  const items=document.querySelectorAll('.check-item');
+  const done=document.querySelectorAll('.check-item.checked').length;
+  const pct=(done/items.length)*100;
+  document.getElementById('progressFill').style.width=pct+'%';
+  document.getElementById('progressText').textContent=`${done} de ${items.length} concluídos`;
+  if(done===items.length)showToast('🎯 Checklist completo! Você está pronta para atender.');
+}
+
+// ── COPY ──
+function copyText(text){
+  navigator.clipboard.writeText(text).then(()=>showToast('📋 Copiado!'));
+}
+
+// ── TOAST ──
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3000);
+}
+
+// Smooth scroll for nav
+document.querySelectorAll('.nav-item').forEach(n=>{
+  n.addEventListener('click',e=>{
+    e.preventDefault();
+    const id=n.getAttribute('href').slice(1);
+    document.getElementById(id)?.scrollIntoView({behavior:'smooth'});
+  });
+});
+</script>
+</body>
+</html>
